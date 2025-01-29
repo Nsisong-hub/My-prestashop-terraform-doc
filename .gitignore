@@ -1,0 +1,7 @@
+# Ignore Terraform state and backup files
+*.tfstate
+*.tfstate.backup
+.terraform/
+terraform.tfvars
+terraform.tfvars.json
+
