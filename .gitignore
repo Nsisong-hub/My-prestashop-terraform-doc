@@ -1,7 +1,10 @@
 # Ignore Terraform state and backup files
 *.tfstate
 *.tfstate.backup
+.terraform.lock.hcl
+null
 .terraform/
 terraform.tfvars
 terraform.tfvars.json
+Prestashop-Public-Subnet2
 
