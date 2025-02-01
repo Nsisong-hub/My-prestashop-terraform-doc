@@ -150,7 +150,7 @@ resource "aws_instance" "prestashop" {
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.public_subnet1.id
   security_groups = [aws_security_group.ec2.id]
-  key_name      = "mykeypair"  # Replace with your key pair name
+  key_name      = "mykeypair"  # Replace with your key pair namec
 
 
   user_data = file("scripts/install-docker.sh")  # Install Docker and PrestaShop
