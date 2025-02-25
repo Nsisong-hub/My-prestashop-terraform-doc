@@ -187,17 +187,46 @@ resource "aws_db_instance" "mysql" {
   skip_final_snapshot = true
 }
 ```
+
+
+***Create Private Subnets For RDS***
+
+```bash
+# Create Private Subnet 1
+resource "aws_subnet" "private_subnet1" {
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.4.0/24"
+  availability_zone = "us-east-1a"
+  tags = {
+    Name = "Prestashop-Private-Subnet1"
+  }
+}
+
+# Create Private Subnet 2
+resource "aws_subnet" "private_subnet2" {
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.5.0/24"
+  availability_zone = "us-east-1b"
+  tags = {
+    Name = "Prestashop-Private-Subnet2"
+  }
+}
+
+
+```
+
 ***Create an RDS DB Subnet Group***
 * Ensure the the subnets are in different AZs
+  
 ```bash
 resource "aws_db_subnet_group" "main" {
   name       = "prestashop-rds-subnet-group"
   subnet_ids = [
-    aws_subnet.public_subnet1.id,
-    aws_subnet.public_subnet2.id, 
+    aws_subnet.private_subnet1.id,
+    aws_subnet.private_subnet2.id
   ]
   tags = {
-    Name = "prestashop-rds-subnet-group"
+    Name = "Prestashop-RDS-Subnet-Group"
   }
 }
 
