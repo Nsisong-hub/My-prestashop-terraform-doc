@@ -45,6 +45,26 @@ resource "aws_subnet" "public_subnet2" {
   }
 }
 
+# Create Private Subnet 1
+resource "aws_subnet" "private_subnet1" {
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.4.0/24"
+  availability_zone = "us-east-1a"
+  tags = {
+    Name = "Prestashop-Private-Subnet1"
+  }
+}
+
+# Create Private Subnet 2
+resource "aws_subnet" "private_subnet2" {
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = "10.0.5.0/24"
+  availability_zone = "us-east-1b"
+  tags = {
+    Name = "Prestashop-Private-Subnet2"
+  }
+}
+
 
 # Create a Route Table and Associate it with the Public Subnets
 resource "aws_route_table" "public" {
@@ -136,11 +156,11 @@ resource "aws_db_instance" "mysql" {
 resource "aws_db_subnet_group" "main" {
   name       = "prestashop-rds-subnet-group"
   subnet_ids = [
-    aws_subnet.public_subnet1.id,
-    aws_subnet.public_subnet2.id, # Ensure this is in different AZs
+    aws_subnet.private_subnet1.id,
+    aws_subnet.private_subnet2.id
   ]
   tags = {
-    Name = "prestashop-rds-subnet-group"
+    Name = "Prestashop-RDS-Subnet-Group"
   }
 }
 
@@ -160,4 +180,5 @@ resource "aws_instance" "prestashop" {
   }
 
 }
+
 
