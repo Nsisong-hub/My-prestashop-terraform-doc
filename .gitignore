@@ -7,4 +7,8 @@ null
 terraform.tfvars
 terraform.tfvars.json
 Prestashop-Public-Subnet2
+terraform.tfstate.1740456382.backup
+terraform.tfstate.1740462010.backup
+terraform.tfstate.1740464098.backup
+
 
